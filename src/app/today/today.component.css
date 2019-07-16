@@ -1,0 +1,25 @@
+h5, h2, .loading{
+    font-family: Oswald, sans-serif;
+    color: #d26c22;
+    font-weight: 500;
+    line-height: 33px;
+}
+h2,.temp{
+    color:#505050;
+    font-size: 18px;
+    font-weight: 600;
+}
+label:hover{
+    cursor: pointer;
+}
+
+agm-map{
+  height: 18rem;
+}
+.loading{
+  font-size: 1.5rem;
+  width: 100%;
+  text-align: center;
+  margin-top: 20rem;
+  box-sizing: border-box;
+}
