@@ -3,6 +3,7 @@ h5, h2, .loading{
     color: #d26c22;
     font-weight: 500;
     line-height: 33px;
+    margin-top: 2rem;
 }
 h2,.temp{
     color:#505050;
@@ -12,7 +13,6 @@ h2,.temp{
 label:hover{
     cursor: pointer;
 }
-
 agm-map{
   height: 18rem;
 }
@@ -22,4 +22,30 @@ agm-map{
   text-align: center;
   margin-top: 20rem;
   box-sizing: border-box;
+}
+.waiting{
+  animation-name: wait;
+  animation-duration: 1s;
+  animation-delay: 5s;
+  animation-fill-mode: backwards;
+  animation-timing-function: ease-in;
+
+
+}
+@keyframes wait{
+  0%{
+    opacity: 0;
+  }
+  10%{
+    opacity: .2;
+  }
+  50%{
+    opacity: .5;
+  }
+  70%{
+    opacity: .7;
+  }
+  100%{
+    opacity: 1;
+  }
 }
