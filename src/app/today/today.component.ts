@@ -12,11 +12,15 @@ export class TodayComponent implements OnInit {
   weather: any;
   latitude: number;
   longitude: number;
+  errorMsg:string = '';
+  notFound;
 
 constructor(private weatherData: WeatherService) { }
 
 ngOnInit(){
+
   this.getLocation()
+
 }
 getLocation(){
   if("geolocation" in navigator){
@@ -29,7 +33,6 @@ getLocation(){
     });
   }, (error) =>{
     if(error.code == error.PERMISSION_DENIED){
-      console.log('deined');
       this.locationDeined = false;
 
     }
@@ -45,12 +48,23 @@ onLocation(event){
   this.weather = data;
   });
 }
-getCity(city: string){
-  this.weatherData.getWeatherDataByCityName(city).subscribe(data =>{
-    this.weather = data;
-    this.latitude = data.coord.lat;
-    this.longitude = data.coord.lon;
-    });
+getCity(city: HTMLInputElement){
+  if(city.value != ''){
+     this.weatherData.getWeatherDataByCityName(city.value).subscribe(data =>{
+      this.weather = data;
+      this.latitude = data.coord.lat;
+      this.longitude = data.coord.lon;
+    },
+    (err=>{
+      this.errorMsg = err.statusText;
+      this.weather = null;
+      this.locationDeined = false;
+    }))
+  }else{
+    this.errorMsg = 'Opps, you forgot to type in your city name!';
+    city.focus();
+  }
+
 }
 
 }

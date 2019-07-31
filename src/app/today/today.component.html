@@ -2,9 +2,9 @@
   <div class="col-md-6 offset-md-3 col-sm-12">
   <div *ngIf="weather; else noLocation">
   <div class="input-group mt-5">
-    <input class="form-control" type="text" #userInput (keyup.enter)="getCity(userInput.value)" placeholder="Enter city name">
+    <input class="form-control" type="text" #userInput (keyup.enter)="getCity(userInput)" placeholder="Enter city name">
     <div class="input-group-append">
-      <button class="input-group-text btn btn-outline-primary" (click)="getCity(userInput.value)"><i class="fa fa-search"></i> Search</button>
+      <button class="input-group-text btn btn-outline-primary" (click)="getCity(userInput)"><i class="fa fa-search"></i> Search</button>
     </div>
   </div>
 <div class="text-center col-sm-12">
@@ -45,13 +45,15 @@
 
 
       <div class="input-group mt-5">
-          <input class="form-control" type="text" #userInput (keyup.enter)="getCity(userInput.value)" [disabled]="locationDeined" placeholder="Enter city name">
+          <input class="form-control" type="text" #userInput (keyup.enter)="getCity(userInput)" [disabled]="locationDeined" placeholder="Enter city name">
           <div class="input-group-append">
-            <button class="input-group-text btn btn-outline-primary" (click)="getCity(userInput.value)" [disabled]="locationDeined"><i class="fa fa-search"></i> Search</button>
+            <button class="input-group-text btn btn-outline-primary" (click)="getCity(userInput)" [disabled]="locationDeined"><i class="fa fa-search"></i> Search</button>
           </div>
         </div>
+
+  <p>{{ errorMsg }}</p>
     <div class="loading" *ngIf="locationDeined">Waiting...
-      <img src="https://media.giphy.com/media/8YvAXzOdUGGk7v6Qdx/giphy.gif" alt="" class="waiting">
+      <img src="https://media.giphy.com/media/8YvAXzOdUGGk7v6Qdx/giphy.gif" alt="" class="waiting" class="img-fluid">
     </div>
   </ng-template>
 </div>
