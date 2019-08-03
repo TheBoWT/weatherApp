@@ -50,7 +50,7 @@ onLocation(event){
 }
 getCity(city: HTMLInputElement){
   if(city.value != ''){
-     this.weatherData.getWeatherDataByCityName(city.value).subscribe(data =>{
+     this.weatherData.getWeatherDataByCityName(city.value).subscribe((data:any) =>{
       this.weather = data;
       this.latitude = data.coord.lat;
       this.longitude = data.coord.lon;
