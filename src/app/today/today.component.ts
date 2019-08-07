@@ -7,25 +7,21 @@ import { WeatherService } from '../weather.service';
   styleUrls: ['./today.component.css']
 })
 export class TodayComponent implements OnInit {
-  location: boolean = false;
-  locationDeined: boolean = true;
+  locationDeinedEnableCity = false;
+  waiting = true;
   weather: any;
   latitude: number;
   longitude: number;
-  errorMsg:string = '';
-  notFound;
-
+  errorMsg = '';
 constructor(private weatherData: WeatherService) { }
 
 ngOnInit(){
-
   this.getLocation()
-
 }
+
 getLocation(){
-  if("geolocation" in navigator){
-    navigator.geolocation.watchPosition((success) =>{
-    this.location = true;
+  if('geolocation' in navigator){
+    navigator.geolocation.getCurrentPosition((success) =>{
     this.latitude = success.coords.latitude;
     this.longitude = success.coords.longitude;
     this.weatherData.getWeatherDataByCoords(this.latitude, this.longitude).subscribe(data =>{
@@ -33,14 +29,14 @@ getLocation(){
     });
   }, (error) =>{
     if(error.code == error.PERMISSION_DENIED){
-      this.locationDeined = false;
-
+      this.locationDeinedEnableCity = true;
+      this.waiting = false;
     }
   });
   }
 }
 
-onLocation(event){
+onMapClick(event){
   this.latitude = event.coords.lat;
   this.longitude = event.coords.lng;
 
@@ -48,6 +44,7 @@ onLocation(event){
   this.weather = data;
   });
 }
+
 getCity(city: HTMLInputElement){
   if(city.value != ''){
      this.weatherData.getWeatherDataByCityName(city.value).subscribe((data:any) =>{
@@ -55,12 +52,11 @@ getCity(city: HTMLInputElement){
       this.latitude = data.coord.lat;
       this.longitude = data.coord.lon;
     },
-    (err=>{
+    (err =>{
       this.errorMsg = err.statusText;
       this.weather = null;
-      this.locationDeined = false;
     }))
-  }else{
+  } else{
     this.errorMsg = 'Opps, you forgot to type in your city name!';
     city.focus();
   }

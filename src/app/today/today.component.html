@@ -36,7 +36,7 @@
           </tr>
     </tbody>
   </table>
-  <agm-map [latitude]="latitude" [longitude]="longitude" (mapClick)="onLocation($event)">
+  <agm-map [latitude]="latitude" [longitude]="longitude" (mapClick)="onMapClick($event)">
       <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
   </agm-map>
 </div>
@@ -44,16 +44,15 @@
   <ng-template #noLocation>
 
 
-      <div class="input-group mt-5">
-          <input class="form-control" type="text" #userInput (keyup.enter)="getCity(userInput)" [disabled]="locationDeined" placeholder="Enter city name">
+      <div class="input-group mt-5" *ngIf="locationDeinedEnableCity">
+          <input class="form-control" type="text" #userInput (keyup.enter)="getCity(userInput)"  placeholder="Enter city name">
           <div class="input-group-append">
-            <button class="input-group-text btn btn-outline-primary" (click)="getCity(userInput)" [disabled]="locationDeined"><i class="fa fa-search"></i> Search</button>
+            <button class="input-group-text btn btn-outline-primary" (click)="getCity(userInput)"><i class="fa fa-search"></i> Search</button>
           </div>
         </div>
 
   <p>{{ errorMsg }}</p>
-    <div class="loading" *ngIf="locationDeined">Waiting...
-      <img src="https://media.giphy.com/media/8YvAXzOdUGGk7v6Qdx/giphy.gif" alt="" class="waiting" class="img-fluid">
+    <div class="loading" *ngIf="waiting">Waiting...
     </div>
   </ng-template>
 </div>

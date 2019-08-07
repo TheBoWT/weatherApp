@@ -28,29 +28,5 @@ agm-map{
   margin-top: 20rem;
   box-sizing: border-box;
 }
-.waiting{
-  animation-name: wait;
-  animation-duration: 1s;
-  animation-delay: 5s;
-  animation-fill-mode: backwards;
-  animation-timing-function: ease-in;
 
 
-}
-@keyframes wait{
-  0%{
-    opacity: 0;
-  }
-  10%{
-    opacity: .2;
-  }
-  50%{
-    opacity: .5;
-  }
-  70%{
-    opacity: .7;
-  }
-  100%{
-    opacity: 1;
-  }
-}

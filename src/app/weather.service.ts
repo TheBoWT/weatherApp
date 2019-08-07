@@ -1,14 +1,11 @@
 import { Injectable,  } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { switchMap } from 'rxjs/operators';
-import { Subject } from 'rxjs';
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class WeatherService {
-  temUnit = new Subject();
 
  url = 'https://api.openweathermap.org/data/2.5/weather';
  apiKey = '81f016c37ac4aa189bb6af59e425894b';
@@ -16,11 +13,7 @@ export class WeatherService {
 constructor(private http:HttpClient) { }
 
 getWeatherDataByCoords(lat, lng){
-  this.temUnit.subscribe(d=>{
-    console.log(d);
-
-  })
-  let params = new HttpParams()
+  const params = new HttpParams()
   .set('lat', lat)
   .set('lon', lng)
   .set('units', 'imperial')
@@ -30,10 +23,10 @@ getWeatherDataByCoords(lat, lng){
 }
 
 getWeatherDataByCityName(city: string){
-  let params = new HttpParams()
+  const params = new HttpParams()
   .set('q', city)
   .set('units', 'imperial')
-  .set('appid', this.apiKey)
+  .set('appid', this.apiKey);
 
   return this.http.get(this.url, { params });
 }
